@@ -1,0 +1,37 @@
+tag: 5.4.0
+registry: registry.example.com
+bootstrapPassword: changeme
+rbac: true
+serviceAccount: neuvector
+global:
+  psp:
+    enabled: false
+runtimePath: /var/run/containerd/containerd.sock
+controller:
+  apisvc:
+    type: ClusterIP
+  pvc:
+    accessModes:
+      - ReadWriteMany
+    storageClass: nfs
+    capacity: 5Gi
+    enabled: true
+  replicas: 3
+manager:
+  ingress:
+    host: neuvector.example.com
+    enabled: true
+    ingressClassName: nginx
+    tls: true
+    secretName: tls-ingress
+enforcer:
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/control-plane
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+cve:
+  scanner:
+    replicas: 3
