@@ -1,5 +1,5 @@
 tag: 5.4.0
-registry: registry.example.com
+# registry: registry.example.com
 bootstrapPassword: changeme
 rbac: true
 serviceAccount: neuvector
