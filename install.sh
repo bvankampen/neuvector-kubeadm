@@ -7,6 +7,9 @@ CHART_VERSION=2.8.1
 HELM_REPO=neuvector-helm-charts
 HELM_CHART_DIR=files/charts
 
+helm repo add $HELM_REPO https://neuvector.github.io/neuvector-helm/
+helm repo update
+
 helm upgrade --install --namespace $NAMESPACE neuvector $HELM_CHART_DIR/core-$CHART_VERSION.tgz --create-namespace --values values.yaml
 
 kubectl --namespace $NAMESPACE create secret tls tls-ingress \
